@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./index.js"></script>
+    <style>
+        #box{width: 30px; display: none; height: 30px; background-color: red; position: fixed; background-image: url(https://blog.gaojundong.com/favicon.ico); background-size: 100% 100%;}
+        .cart{width: 60px; height: 40px; border: 1px solid blue; border-top: none; position: fixed; top: 395px; left: 385px; text-align: center;}
+        .add{position: fixed; left: 600px; cursor: pointer; top: 200px; width: 50px; line-height: 30px; text-align: center; color: red; border: 1px solid blue;}
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <div class="cart">购物车</div>
+    <div class="add" onclick='add()'>添加</div>
+
+    <script>
+        let arr = flycart([600,200], [400, 400], 40, 50, 0)
+        console.log(arr.length)
+
+
+        let index = 0
+        let dom = document.getElementById('box')
+        let rq = null
+        function fly() {
+            index++
+            if(index < arr.length){
+                dom.style.display = 'block'
+
+                dom.style.left = arr[index][0] + 'px'
+                dom.style.top = arr[index][1] + 'px'
+                // document.body.innerHTML = arr[index]
+                rq = requestAnimationFrame(fly)
+            }else{
+                cancelAnimationFrame(rq)
+                dom.style.display = 'none'
+                index = 0
+            }
+            
+        }
+        
+
+
+        function add() {
+            requestAnimationFrame(fly)
+        }
+        
+    </script>
+</body>
+</html>
